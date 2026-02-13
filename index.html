@@ -3,8 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Direktli — Seedha Kaam. No Ghol-Jhal.</title>
-  <meta name="description" content="Direktli connects you directly to work — no middlemen, no drama. Join the waitlist." />
+
+  <!-- ── PRIMARY SEO ──────────────────────────────────────────── -->
+  <title>Direktli — Direct Work, No Middlemen | Seedha Kaam</title>
+  <meta name="description" content="Direktli connects freelancers and workers directly with businesses across India. No agents, no commission cuts, no drama. Join the waitlist today." />
+  <meta name="keywords" content="direct work platform, freelance India, gig work India, no middlemen jobs, seedha kaam, work from home India, direct hiring" />
+  <meta name="author" content="Direktli" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- ── CANONICAL ────────────────────────────────────────────── -->
+  <!-- Replace with your actual domain once live -->
+  <link rel="canonical" href="https://direktli.com/" />
+
+  <!-- ── OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://direktli.com/" />
+  <meta property="og:site_name"   content="Direktli" />
+  <meta property="og:title"       content="Direktli — Seedha Kaam. No Ghol-Jhal." />
+  <meta property="og:description" content="Work opportunities direct from businesses to you. No agents, no cuts, no nonsense. Join the Direktli waitlist." />
+  <meta property="og:image"       content="https://direktli.com/og-image.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale"      content="en_IN" />
+
+  <!-- ── TWITTER / X CARD ─────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Direktli — Seedha Kaam. No Ghol-Jhal." />
+  <meta name="twitter:description" content="Work opportunities direct from businesses to you. No agents, no cuts, no nonsense." />
+  <meta name="twitter:image"       content="https://direktli.com/og-image.png" />
+
+  <!-- ── JSON-LD STRUCTURED DATA ──────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Direktli",
+    "url": "https://direktli.com/",
+    "description": "Direktli connects workers and freelancers directly with businesses across India — no middlemen, no commission cuts.",
+    "potentialAction": {
+      "@type": "RegisterAction",
+      "target": "https://direktli.com/#waitlist",
+      "name": "Join Waitlist"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Direktli",
+      "url": "https://direktli.com/",
+      "description": "A direct work platform for India — Seedha Kaam, No Ghol-Jhal."
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -89,8 +138,8 @@
       position: relative; z-index: 1;
       min-height: 100dvh;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 2rem 1.25rem;
+      align-items: center; justify-content: flex-start;
+      padding: 4rem 1.25rem 5rem;
       gap: 2.5rem;
     }
 
@@ -357,6 +406,103 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* ── HOW IT WORKS ───────────────────────────────────── */
+    .section {
+      width: 100%; max-width: 680px;
+      animation: fadeUp .7s ease .5s both;
+    }
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green);
+      text-align: center;
+      margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.25rem, 4vw, 1.7rem);
+      font-weight: 800;
+      text-align: center;
+      color: var(--text);
+      margin-bottom: 2rem;
+      letter-spacing: -.02em;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.4rem 1.2rem;
+      position: relative;
+      transition: border-color .2s, transform .2s;
+    }
+    .step:hover {
+      border-color: rgba(16,185,129,.25);
+      transform: translateY(-3px);
+    }
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(16,185,129,.15);
+      line-height: 1;
+      margin-bottom: .75rem;
+    }
+    .step-heading {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .4rem;
+    }
+    .step-desc {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── FAQ ─────────────────────────────────────────────── */
+    .faq { width: 100%; max-width: 580px; animation: fadeUp .7s ease .55s both; }
+    .faq-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.45rem);
+      font-weight: 800;
+      text-align: center;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      letter-spacing: -.02em;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: .9rem 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .faq-a {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .faq-a strong { color: var(--green); font-weight: 600; }
+
+    /* ── DIVIDER ─────────────────────────────────────────── */
+    .divider {
+      width: 100%; max-width: 580px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
     /* ── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 380px) {
       .card { padding: 1.4rem; }
@@ -476,7 +622,7 @@
     </div>
 
     <!-- Card -->
-    <div class="card" role="region" aria-label="Join waitlist">
+    <div class="card" id="waitlist" role="region" aria-label="Join waitlist">
 
       <!-- Form -->
       <div id="form-block">
@@ -528,6 +674,65 @@
 
     </div><!-- .card -->
 
+    <div class="divider" role="separator"></div>
+
+    <!-- How it works — keyword-rich content for SEO -->
+    <section class="section" aria-labelledby="how-heading">
+      <p class="section-label">How It Works</p>
+      <h2 class="section-title" id="how-heading">Kaam dhundhna itna simple kabhi nahi tha</h2>
+      <div class="steps">
+
+        <article class="step">
+          <div class="step-num" aria-hidden="true">01</div>
+          <h3 class="step-heading">Join the Waitlist</h3>
+          <p class="step-desc">Drop your email. That's it. No lengthy forms, no uploading a CV, no waiting on hold.</p>
+        </article>
+
+        <article class="step">
+          <div class="step-num" aria-hidden="true">02</div>
+          <h3 class="step-heading">We Match You</h3>
+          <p class="step-desc">Direktli's platform matches your skills to real gigs from verified local businesses — seedha.</p>
+        </article>
+
+        <article class="step">
+          <div class="step-num" aria-hidden="true">03</div>
+          <h3 class="step-heading">Work & Get Paid</h3>
+          <p class="step-desc">Connect directly with the employer. No agent taking a cut. Full pay, full respect.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="divider" role="separator"></div>
+
+    <!-- FAQ — long-tail keyword content for Google -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq-title" id="faq-heading">Sawaal? Jawaab hazir hai.</h2>
+
+      <div class="faq-item">
+        <p class="faq-q">Direktli kya hai?</p>
+        <p class="faq-a">Direktli ek <strong>direct work platform</strong> hai India ke liye — freelancers aur workers ko businesses se seedha jodhta hai. Koi agent nahi, koi commission nahi.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Is it free to join?</p>
+        <p class="faq-a">Haan — <strong>100% free</strong> for workers and job seekers. Joining the waitlist costs nothing.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">What kind of work is available?</p>
+        <p class="faq-a">Freelance projects, part-time gigs, full-time roles, and contract work across sectors — tech, design, content, logistics, and more. <strong>All direct. All transparent.</strong></p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">When does Direktli launch?</p>
+        <p class="faq-a">We're in early access right now. Waitlist members will be the <strong>first to get access</strong> — before the public launch.</p>
+      </div>
+
+    </section>
+
+    <div class="divider" role="separator"></div>
+
     <!-- Footer -->
     <footer class="footer">
       © 2025 Direktli &nbsp;·&nbsp; <a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a>
@@ -539,12 +744,13 @@
     /*
     ══════════════════════════════════════════════════════════════
       DIREKTLI — WAITLIST FORM LOGIC
-      Replace SCRIPT_URL below with your Google Apps Script Web
-      App deployment URL after publishing your Apps Script.
+      SCRIPT_URL is injected at build time by build.js using the
+      APPS_SCRIPT_URL environment variable set in Vercel.
+      Never hardcode this value here.
     ══════════════════════════════════════════════════════════════
     */
 
-    const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
+    const SCRIPT_URL = '%%APPS_SCRIPT_URL%%';
 
     // ── Email validation ──────────────────────────────────────────
     const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
