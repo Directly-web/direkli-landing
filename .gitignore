@@ -1,0 +1,6 @@
+# Build output — generated at deploy time, never commit
+dist/
+
+# Local env file — use Vercel dashboard for production secrets
+.env
+.env.local
