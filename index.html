@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Direktli — Seedha Kaam. No Ghol-Jhal.</title>
+  <meta name="description" content="Direktli connects you directly to work — no middlemen, no drama. Join the waitlist." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── VARIABLES ──────────────────────────────────────── */
+    :root {
+      --green:  #10b981;
+      --green-dark: #059669;
+      --green-glow: rgba(16,185,129,.18);
+      --navy:   #1e3a8a;
+      --navy-light: #2d4fa0;
+      --yellow: #facc15;
+      --yellow-pale: rgba(250,204,21,.12);
+      --bg:     #0b1120;
+      --surface:#111827;
+      --border: rgba(255,255,255,.08);
+      --text:   #f1f5f9;
+      --muted:  #94a3b8;
+      --r: 16px;
+    }
+
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── BACKGROUND GRID ────────────────────────────────── */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(16,185,129,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,185,129,.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .bg-grid::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%,
+        rgba(30,58,138,.35) 0%,
+        transparent 70%);
+    }
+
+    /* ── FLOATING BG ICONS ──────────────────────────────── */
+    .bg-icons {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .bg-icon {
+      position: absolute;
+      opacity: .06;
+      color: var(--green);
+    }
+    .bg-icon svg { display: block; }
+
+    .bg-icon:nth-child(1) { top: 8%;  left: 5%;  animation: floatA 8s ease-in-out infinite; }
+    .bg-icon:nth-child(2) { top: 15%; right: 8%; animation: floatB 10s ease-in-out infinite; color: var(--yellow); }
+    .bg-icon:nth-child(3) { top: 55%; left: 3%;  animation: floatA 12s ease-in-out infinite 1s; }
+    .bg-icon:nth-child(4) { top: 70%; right: 6%; animation: floatB 9s ease-in-out infinite 2s; color: var(--yellow); }
+    .bg-icon:nth-child(5) { top: 85%; left: 45%; animation: floatA 11s ease-in-out infinite .5s; }
+    .bg-icon:nth-child(6) { top: 40%; right: 2%; animation: floatB 7s ease-in-out infinite 3s; }
+
+    @keyframes floatA {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33%       { transform: translate(8px, -14px) rotate(4deg); }
+      66%       { transform: translate(-5px, 10px) rotate(-3deg); }
+    }
+    @keyframes floatB {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      40%       { transform: translate(-10px, -8px) rotate(-5deg); }
+      70%       { transform: translate(6px, 12px) rotate(3deg); }
+    }
+
+    /* ── LAYOUT ─────────────────────────────────────────── */
+    .page {
+      position: relative; z-index: 1;
+      min-height: 100dvh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem 1.25rem;
+      gap: 2.5rem;
+    }
+
+    /* ── TOP BADGE ──────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(16,185,129,.1);
+      border: 1px solid rgba(16,185,129,.25);
+      border-radius: 999px;
+      padding: .4rem 1rem;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green);
+      animation: fadeDown .6s ease both;
+    }
+    .badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,.6); }
+      50%       { box-shadow: 0 0 0 5px rgba(16,185,129,0); }
+    }
+
+    /* ── HERO TEXT ──────────────────────────────────────── */
+    .hero { text-align: center; max-width: 640px; }
+
+    .wordmark {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.2rem, 11vw, 6.5rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.03em;
+      animation: fadeUp .7s ease .1s both;
+      position: relative; display: inline-block;
+    }
+    .wordmark .w-dir { color: var(--text); }
+    .wordmark .w-kt {
+      color: var(--green);
+      position: relative;
+    }
+    .wordmark .w-kt::after {
+      content: '';
+      position: absolute; bottom: 4px; left: 0; right: 0; height: 4px;
+      background: var(--yellow);
+      border-radius: 2px;
+      transform: scaleX(.85) translateY(4px);
+      animation: lineGrow .8s ease .6s both;
+      transform-origin: left;
+    }
+    @keyframes lineGrow {
+      from { transform: scaleX(0) translateY(4px); opacity: 0; }
+      to   { transform: scaleX(.85) translateY(4px); opacity: 1; }
+    }
+
+    .tagline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1rem, 3.5vw, 1.35rem);
+      font-weight: 700;
+      color: var(--yellow);
+      margin-top: 1rem;
+      letter-spacing: .01em;
+      animation: fadeUp .7s ease .2s both;
+    }
+
+    .sub {
+      margin-top: .9rem;
+      font-size: clamp(.9rem, 2.5vw, 1.05rem);
+      color: var(--muted);
+      line-height: 1.65;
+      animation: fadeUp .7s ease .3s both;
+    }
+
+    /* ── FEATURES PILLS ─────────────────────────────────── */
+    .pills {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem;
+      animation: fadeUp .7s ease .35s both;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: .45rem 1rem;
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all .2s;
+    }
+    .pill:hover {
+      border-color: rgba(16,185,129,.3);
+      color: var(--text);
+      background: rgba(16,185,129,.06);
+    }
+    .pill svg { color: var(--green); flex-shrink: 0; }
+
+    /* ── FORM CARD ──────────────────────────────────────── */
+    .card {
+      width: 100%; max-width: 440px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.75rem;
+      box-shadow:
+        0 0 0 1px rgba(16,185,129,.04),
+        0 20px 60px rgba(0,0,0,.5),
+        0 0 80px var(--green-glow);
+      animation: fadeUp .7s ease .45s both;
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--green), var(--yellow), transparent);
+    }
+
+    .card-label {
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .form-row {
+      display: flex; gap: .6rem;
+      flex-direction: column;
+    }
+    @media(min-width: 420px) {
+      .form-row { flex-direction: row; }
+    }
+
+    .email-input {
+      flex: 1;
+      background: rgba(255,255,255,.05);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: .85rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      width: 100%;
+      min-width: 0;
+    }
+    .email-input::placeholder { color: #475569; }
+    .email-input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(16,185,129,.12);
+    }
+    .email-input.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,.1);
+    }
+
+    .btn {
+      background: var(--green);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      padding: .85rem 1.4rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      position: relative; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,.12) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .btn:hover:not(:disabled) {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(16,185,129,.35);
+    }
+    .btn:active:not(:disabled) { transform: translateY(0); }
+    .btn:disabled {
+      opacity: .7; cursor: not-allowed;
+    }
+
+    /* loading spinner inside button */
+    .btn-inner {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+    }
+    .spinner {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: #fff;
+      animation: spin .65s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-msg {
+      font-size: .8rem; color: #f87171;
+      margin-top: .5rem;
+      min-height: 1.1em;
+      padding-left: .25rem;
+    }
+
+    .micro-note {
+      font-size: .75rem; color: #475569;
+      text-align: center; margin-top: .9rem;
+      display: flex; align-items: center; justify-content: center; gap: .35rem;
+    }
+    .micro-note svg { color: var(--green); flex-shrink: 0; }
+
+    /* ── SUCCESS STATE ───────────────────────────────────── */
+    .success-block {
+      display: none;
+      flex-direction: column; align-items: center;
+      text-align: center; gap: .9rem;
+      padding: .5rem 0;
+      animation: successPop .5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes successPop {
+      from { opacity: 0; transform: scale(.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .success-icon {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(16,185,129,.12);
+      border: 2px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green);
+    }
+    .success-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--text);
+    }
+    .success-msg {
+      font-size: .9rem; color: var(--muted);
+      line-height: 1.55; max-width: 300px;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    .footer {
+      font-size: .75rem; color: #334155;
+      text-align: center;
+      animation: fadeUp .7s ease .6s both;
+    }
+    .footer a { color: #475569; text-decoration: none; }
+    .footer a:hover { color: var(--muted); }
+
+    /* ── KEYFRAMES ──────────────────────────────────────── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 380px) {
+      .card { padding: 1.4rem; }
+      .pill  { font-size: .78rem; padding: .38rem .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-icons" aria-hidden="true">
+
+    <!-- Briefcase icon -->
+    <div class="bg-icon" style="width:72px;height:72px">
+      <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+      </svg>
+    </div>
+
+    <!-- Zap icon -->
+    <div class="bg-icon" style="width:56px;height:56px">
+      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+    </div>
+
+    <!-- Users icon -->
+    <div class="bg-icon" style="width:80px;height:80px">
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </div>
+
+    <!-- Zap (bottom-right) -->
+    <div class="bg-icon" style="width:64px;height:64px">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+    </div>
+
+    <!-- Briefcase (bottom-center) -->
+    <div class="bg-icon" style="width:56px;height:56px">
+      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+      </svg>
+    </div>
+
+    <!-- Users (mid-right) -->
+    <div class="bg-icon" style="width:68px;height:68px">
+      <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Main page -->
+  <main class="page">
+
+    <!-- Live badge -->
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Early Access Open
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1 class="wordmark">
+        <span class="w-dir">Dir</span><span class="w-kt">ektli</span>
+      </h1>
+      <p class="tagline">Seedha Kaam. No Ghol-Jhal.</p>
+      <p class="sub">
+        Work opportunities — direct from businesses to you.<br/>
+        No agents, no cuts, no nonsense.
+      </p>
+    </div>
+
+    <!-- Pills -->
+    <div class="pills" role="list">
+      <div class="pill" role="listitem">
+        <!-- Briefcase -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="20" height="14" x="2" y="7" rx="2"/>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+        </svg>
+        Direct Gigs
+      </div>
+      <div class="pill" role="listitem">
+        <!-- Zap -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        Zero Middlemen
+      </div>
+      <div class="pill" role="listitem">
+        <!-- Users -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        Real People
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="card" role="region" aria-label="Join waitlist">
+
+      <!-- Form -->
+      <div id="form-block">
+        <p class="card-label">Join the Waitlist</p>
+        <div class="form-row">
+          <input
+            type="email"
+            id="email-input"
+            class="email-input"
+            placeholder="aapka@email.com"
+            autocomplete="email"
+            inputmode="email"
+            aria-label="Email address"
+            aria-required="true"
+          />
+          <button class="btn" id="submit-btn" type="button" onclick="handleSubmit()">
+            <span class="btn-inner">
+              <span class="spinner" id="spinner" aria-hidden="true"></span>
+              <span id="btn-text">Join Waitlist</span>
+            </span>
+          </button>
+        </div>
+        <div class="error-msg" id="error-msg" role="alert" aria-live="polite"></div>
+        <div class="micro-note" aria-hidden="true">
+          <!-- Shield check icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          No spam. Kabhi nahin.
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div class="success-block" id="success-block" role="status" aria-live="polite">
+        <div class="success-icon" aria-hidden="true">
+          <!-- Check icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </div>
+        <p class="success-title">Shabaash! 🎉</p>
+        <p class="success-msg">
+          You're on the list. We'll reach out directly — seedha aapko.
+        </p>
+      </div>
+
+    </div><!-- .card -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      © 2025 Direktli &nbsp;·&nbsp; <a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a>
+    </footer>
+
+  </main>
+
+  <script>
+    /*
+    ══════════════════════════════════════════════════════════════
+      DIREKTLI — WAITLIST FORM LOGIC
+      Replace SCRIPT_URL below with your Google Apps Script Web
+      App deployment URL after publishing your Apps Script.
+    ══════════════════════════════════════════════════════════════
+    */
+
+    const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
+
+    // ── Email validation ──────────────────────────────────────────
+    const EMAIL_REGEX = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+
+    function validateEmail(email) {
+      if (!email || email.trim() === '') return 'Email address is required.';
+      if (!EMAIL_REGEX.test(email.trim())) return 'Please enter a valid email address.';
+      return null;
+    }
+
+    // ── UI helpers ────────────────────────────────────────────────
+    function setLoading(isLoading) {
+      const btn     = document.getElementById('submit-btn');
+      const spinner = document.getElementById('spinner');
+      const btnText = document.getElementById('btn-text');
+      const input   = document.getElementById('email-input');
+
+      btn.disabled = isLoading;
+      input.disabled = isLoading;
+
+      if (isLoading) {
+        spinner.style.display = 'block';
+        btnText.textContent = 'Saving...';
+      } else {
+        spinner.style.display = 'none';
+        btnText.textContent = 'Join Waitlist';
+      }
+    }
+
+    function setError(msg) {
+      const el = document.getElementById('error-msg');
+      const input = document.getElementById('email-input');
+      el.textContent = msg || '';
+      if (msg) {
+        input.classList.add('error');
+        input.setAttribute('aria-invalid', 'true');
+      } else {
+        input.classList.remove('error');
+        input.removeAttribute('aria-invalid');
+      }
+    }
+
+    function showSuccess() {
+      document.getElementById('form-block').style.display = 'none';
+      const success = document.getElementById('success-block');
+      success.style.display = 'flex';
+    }
+
+    // ── Submit handler ────────────────────────────────────────────
+    async function handleSubmit() {
+      const input = document.getElementById('email-input');
+      const email = input.value.trim();
+
+      // Clear previous error
+      setError('');
+
+      // Validate
+      const error = validateEmail(email);
+      if (error) {
+        setError(error);
+        input.focus();
+        return;
+      }
+
+      // Set loading state
+      setLoading(true);
+
+      const payload = {
+        email: email,
+        timestamp: new Date().toISOString(),
+        source: window.location.hostname || 'direktli'
+      };
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          // no-cors mode is required for Google Apps Script Web Apps
+          // that don't set CORS headers when deployed as 'anyone' 
+          mode: 'no-cors'
+        });
+
+        /*
+          Note: With mode:'no-cors' we can't read the response body,
+          but a successful network request means the Apps Script received
+          the data. The opaque response is treated as success here.
+          If you need confirmation, deploy your Apps Script to allow CORS
+          and remove the no-cors mode.
+        */
+        showSuccess();
+
+      } catch (err) {
+        console.error('Submission error:', err);
+        setLoading(false);
+        setError('Network error — please try again in a moment.');
+      }
+    }
+
+    // ── Allow Enter key to submit ─────────────────────────────────
+    document.getElementById('email-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleSubmit();
+    });
+
+    // ── Clear error on input ──────────────────────────────────────
+    document.getElementById('email-input').addEventListener('input', function() {
+      setError('');
+    });
+  </script>
+
+</body>
+</html>
